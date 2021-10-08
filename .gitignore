@@ -3,3 +3,4 @@ __pycache__
 .vscode
 *.swp
 *.db
+secret_config.py
