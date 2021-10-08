@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Online Voting Registry{% endblock %}
+
+{% block main %}
+<div class="container">
+    <p>Welcome to the voting registrar.</p>
+{% if current_user.is_authenticated %}
+    {% if user_has_voted %}
+    <p>You have already voted. Thank you for voting!</p>
+    <p>You can view election results at the <a href="{{ resultserver_url }}">results site</a>.</p>
+    {% else %}
+    <p><a href="{{ url_for('checkin') }}">Check in</a> to receive your ballotbox token.</p>
+    {% endif %}
+{% else %}
+    <p><a href="{{ url_for('register') }}">Register</a> or <a href="{{ url_for('login') }}">log in</a> to gain access to your ballotbox token.</p>
+{% endif %}
+</div>
+{% endblock %}

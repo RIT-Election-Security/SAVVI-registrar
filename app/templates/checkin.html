@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Check In{% endblock %}
+
+{% block main %}
+<div class="container">
+{% if user_has_voted %}
+  <p>You have already voted. Thank you for voting!</p>
+  <p>You can view election results at the <a href="{{ RESULTSERVER_URL }}">results site</a>.</p>
+{% else %}
+  <div id="token">{{ token }}</div>
+  <div>
+    <button onclick="copy_element_text_by_id('token')">Copy to Clipboard</button>
+    <button onclick="download_element_text_as_file_by_id('token')">Download as File</button>
+  </div>
+  <div class="info">
+    <p class="info-text">Present this token to the ballotbox application to gain access to your ballot</p>
+  </div>
+  <a class="link-button" id="vote-link" href="{{ ballot_box_url }}">Vote</a>
+{% endif %}
+</div>
+{% endblock %}

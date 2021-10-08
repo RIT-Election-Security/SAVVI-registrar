@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/registrar.js') }}"></script>
+</head>
+
+<body>
+  {% block navbar %}
+  <span class="navbar">
+      <a class="link-button" id="home-nav" href="{{ url_for('home') }}">Home</a>
+    {% if current_user.is_authenticated %}
+      <a class="link-button" id="checkin-nav" href="{{ url_for('checkin') }}">Checkin</a>
+      <a class="link-button" id="logout-nav" href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a class="link-button" id="register-nav" href="{{ url_for('register') }}">Register</a>
+      <a class="link-button" id="login-nav" href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+  </span>
+  {% endblock %}
+  <main>
+    {% block main %}{% endblock %}
+  </main>
+</body>
+
+</html>

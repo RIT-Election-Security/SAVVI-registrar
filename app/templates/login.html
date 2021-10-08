@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Log In{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block main %}
+<div class="container">
+  {% for message in get_flashed_messages() %}
+  <div class="alert">{{ message }}</div>
+  {% endfor %}
+  <form id="login-form" action="{{ url_for('login') }}" method="POST">
+	<label class="form-label" for="email" >Email</label><br>
+	<input class="form-input" type="text" id="email" name="email" placeholder="email" required><br>
+	<label class="form-label" for="password">Password</label><br>
+	<input class="form-input" type="password" id="password" name="password" placeholder="password" required><br>
+	<input class="form-submit" type="submit" value="Log In">
+  </form>
+</div>
+{% endblock %}

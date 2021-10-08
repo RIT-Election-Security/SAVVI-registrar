@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+<div class="container">
+  {% for message in get_flashed_messages() %}
+  <div class="alert">{{ message }}</div>
+  {% endfor %}
+  <form id="register-form" action="{{ url_for('register') }}" method="POST">
+    <label class="form-label" for="firstname">Legal First Name</label><br>
+    <input class="form-input" type="text" name="firstname" placeholder="Legal First Name" required><br>
+    <label class="form-label" for="lastname">Legal Last Name</label><br>
+    <input class="form-input" type="text" name="lastname" placeholder="Legal Last Name" required><br>
+    <label class="form-label" for="address">Address</label><br>
+    <input class="form-input" type="text" name="address" placeholder="Permanent Residence Address" required><br>
+    <label class="form-label" for="email">Email Address</label><br>
+    <input class="form-input" type="text" name="email" placeholder="Email Address" required><br>
+    <label class="form-label" for="password">Password</label><br>
+    <input class="form-input" type="password" name="password" placeholder="Password" required><br>
+    <input class="form-submit" type="submit" value="Register">
+  </form>
+</div>
+{% endblock %}
