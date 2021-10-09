@@ -1,1 +1,0 @@
-SHARED_KEY = b'07IcFyQ15vuq2EwpmCRrd0n1oxy-oHM94mJo19f6VbI='
