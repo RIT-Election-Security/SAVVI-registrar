@@ -4,8 +4,6 @@ from dataclasses import dataclass
 from json import dumps, loads
 from sys import getdefaultencoding
 
-from .config import BALLOT_BOX_ENDIANNESS
-
 
 @dataclass
 class BallotDetails():
