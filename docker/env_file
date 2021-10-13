@@ -1,0 +1,16 @@
+# Registrar environment variables
+# All variables can also be defined in config.py or secret_config.py
+
+
+# Key shared with ballotbox
+# No default, so a value must be supplied
+#SHARED_KEY=
+
+# Publicly Accessible URL for ballot box application
+#BALLOT_BOX_URL="http://localhost:5001"
+
+# Publicly Accessible URL for result server application
+#RESULTSERVER_URL="http://localhost:5002"
+
+# URL for Accessing database
+#DATABASE_URL="sqlite:///data/sqlite.db"

@@ -1,0 +1,13 @@
+---
+version: "3"
+services:
+  registrar:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    env_file: docker/env_file
+    volumes:
+      data/sqlite.db:data/sqlite.db
+
+volumes:
+  data/sqlite.db
