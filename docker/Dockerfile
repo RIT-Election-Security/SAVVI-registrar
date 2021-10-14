@@ -1,9 +1,5 @@
 FROM python:3.9-bullseye
 
-# Install prerequisite requirements
-RUN apt update
-RUN apt install libgmp3-dev libmpfr-dev libmpc-dev
-
 # Install requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
