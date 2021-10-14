@@ -8,6 +8,8 @@ services:
     env_file: ./docker/env_file
     volumes:
       - database:/app/data/
+    ports:
+      80:80
 
 volumes:
   database:
