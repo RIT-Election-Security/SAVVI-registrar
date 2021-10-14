@@ -10,4 +10,4 @@ services:
       data/sqlite.db:data/sqlite.db
 
 volumes:
-  data/sqlite.db
+  data/sqlite.db:data/sqlite.db
