@@ -16,6 +16,7 @@ COPY app ./app
 
 # Create database entries for voters
 COPY data/voter_data.json /tmp/voter_data.json
+RUN mkdir /app/data
 RUN python run.py addvoters -jsonfile /tmp/voter_data.json
 
 # Run on port 0.0.0.0:80
