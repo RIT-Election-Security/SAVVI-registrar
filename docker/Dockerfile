@@ -20,4 +20,4 @@ RUN mkdir /app/data
 RUN python run.py addvoters -jsonfile /tmp/voter_data.json
 
 # Run on port 0.0.0.0:80
-CMD python runserver -a "0.0.0.0" -p 80
+CMD python run.py runserver -a "0.0.0.0" -p 80

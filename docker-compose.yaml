@@ -7,7 +7,7 @@ services:
       dockerfile: ./docker/Dockerfile
     env_file: ./docker/env_file
     volumes:
-      - database:/app/data/sqlite.db
+      - database:/app/data/
 
 volumes:
   database:
