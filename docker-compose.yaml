@@ -4,10 +4,10 @@ services:
   registrar:
     build:
       context: .
-      dockerfile: docker/Dockerfile
-    env_file: docker/env_file
+      dockerfile: ./docker/Dockerfile
+    env_file: ./docker/env_file
     volumes:
-      data/sqlite.db:data/sqlite.db
+      database:data/sqlite.db
 
 volumes:
-  data/sqlite.db:data/sqlite.db
+  database
