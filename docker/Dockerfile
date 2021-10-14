@@ -9,8 +9,10 @@ COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
 # Copy in app code
+RUN mkdir /app
+WORKDIR /app
 COPY run.py .
-COPY app .
+COPY app ./app
 
 # Create database entries for voters
 COPY data/voter_data.json /tmp/voter_data.json
