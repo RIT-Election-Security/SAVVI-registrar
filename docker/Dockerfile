@@ -1,5 +1,9 @@
 FROM python:3.9-bullseye
 
+# Install prerequisite requirements
+RUN apt update
+RUN apt install python3-pip
+
 # Install requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
