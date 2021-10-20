@@ -28,6 +28,7 @@ if app.config.get("ALLOW_ORIGIN") == "localhost" or app.config.get("ALLOW_ORIGIN
 # Wrap app for auth
 AuthManager(app)
 app.config["QUART_AUTH_COOKIE_NAME"] = "quart_auth_registrar"
+app.config["QUART_AUTH_COOKIE_SAMESITE"] = "Strict"
 app.secret_key = token_urlsafe(16)
 
 app.db_session = create_session(app.config.get("DATABASE_URL"))

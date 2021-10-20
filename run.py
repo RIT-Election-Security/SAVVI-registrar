@@ -1,8 +1,9 @@
+from quart import helpers
 from app import app
 from app.database import add_eligible_voters
 
 
-def runserver(host_address: str="0.0.0.0", port: int=5000, debug: bool=False):
+def runserver(host_address: str="0.0.0.0", port: int=5000, debug: bool=False, key: str=None, cert: str=None, cacert: str=None):
     """
     Run the registrar application server.
 
@@ -11,7 +12,10 @@ def runserver(host_address: str="0.0.0.0", port: int=5000, debug: bool=False):
         port: port number to bind to
         debug: toggle debug mode
     """
-    app.run(debug=debug, host=host_address, port=port)
+    if key or cert and not key or not cert:
+        print("both cert and key required if one presented")
+        exit(1)
+    app.run(debug=debug, host=host_address, port=port, keyfile=key, certfile=key, ca_certs=cacert)
 
 
 def addvoters(sqlfile: str=None, jsonfile: str=None, strict: bool=False):
@@ -48,6 +52,9 @@ if __name__ == "__main__":
     runserver_parser.add_argument("-debug", action="store_true", help="Run app in debug mode")
     runserver_parser.add_argument("-a", "--addr", type=str, default="0.0.0.0", help="Host to bind app to")
     runserver_parser.add_argument("-p", "--port", type=int, default=5000, help="Port to bind app to")
+    runserver_parser.add_argument("-key", type=str, help="Path to TLS key file")
+    runserver_parser.add_argument("-cert", type=str, help="Path to TLS certificate file")
+    runserver_parser.add_argument("-cacert", type=str, help="Path to CA TLS certificate")
     
     addusers_parser = subparsers.add_parser("addvoters", help="Add eligible voters to the database")
     addusers_parser.add_argument("-sqlfile", help="SQLite file with voter data")
@@ -57,6 +64,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.action == "runserver":
-        runserver(args.addr, args.port, debug=args.debug)
+        runserver(args.addr, args.port, debug=args.debug, key=args.key, cert=args.cert, cacert=args.cacert)
     elif args.action == "addvoters":
         addvoters(sqlfile=args.sqlfile, jsonfile=args.jsonfile)
