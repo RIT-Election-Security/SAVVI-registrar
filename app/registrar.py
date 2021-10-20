@@ -1,16 +1,16 @@
 from quart import Quart, abort, flash, render_template, redirect, url_for, request
 from quart_auth import AuthManager, AuthUser, Unauthorized, current_user, login_user, logout_user, login_required
+from quart_cors import cors
 from secrets import token_urlsafe
 
 from .ballotbox_utils import decode_decrypt_load_dict, generate_ballot_details_token
 from .database import add_token_id, add_user, check_token_is_valid, get_user_voted_status, create_session, get_user_ballot_details, set_user_voted_status_true, verify_user_password
 
 
+# Make app object
 app = Quart(__name__)
-AuthManager(app)
-app.config["QUART_AUTH_COOKIE_NAME"] = "quart_auth_registrar"
-app.secret_key = token_urlsafe(16)
 
+# Load Config files
 try:
     app.config.from_pyfile("config.py")
 except FileNotFoundError:
@@ -20,6 +20,15 @@ try:
     app.config.from_pyfile("secret_config.py")
 except FileNotFoundError:
     print("Secrets config file not found")
+
+# Wrap app for CORS if not running on localhost
+if app.config.get("ALLOW_ORIGIN") == "localhost" or app.config.get("ALLOW_ORIGIN") == "127.0.0.1":
+    app = cors(app, allow_origin=app.config.get("ALLOW_ORIGIN"), allow_methods=["GET", "POST"])
+
+# Wrap app for auth
+AuthManager(app)
+app.config["QUART_AUTH_COOKIE_NAME"] = "quart_auth_registrar"
+app.secret_key = token_urlsafe(16)
 
 app.db_session = create_session(app.config.get("DATABASE_URL"))
 

@@ -9,6 +9,9 @@ cryptography == 3.4.7
 # app/registrar.py: 2
 quart_auth == 0.5.0
 
+# app/registrar.py: 3
+Quart-CORS == 0.5.0
+
 # app/database.py: 6
 scrypt == 0.8.18
 

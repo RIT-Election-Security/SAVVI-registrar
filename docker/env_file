@@ -14,3 +14,8 @@
 
 # URL for Accessing database
 #DATABASE_URL="sqlite:///data/sqlite.db"
+
+# CORS allowed origin pattern
+# CORS ignored if set to localhost or 127.0.0.1
+# IF NOT SPECIFIED ORIGIN WILL BE '*' WHICH IS INSECURE
+#ALLOWED_ORIGIN=
