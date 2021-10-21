@@ -23,5 +23,5 @@ RUN python run.py addvoters -jsonfile /tmp/voter_data.json
 COPY docker/server.key /app/server.key
 COPY docker/server.crt /app/server.crt
 
-# Run on port 0.0.0.0:80
+# Run on port 0.0.0.0:443
 CMD python run.py runserver -a "0.0.0.0" -p 443 -key /app/server.key -cert /app/server.crt
