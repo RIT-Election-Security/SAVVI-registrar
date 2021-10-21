@@ -22,7 +22,7 @@ except FileNotFoundError:
     print("Secrets config file not found")
 
 # Wrap app for CORS if not running on localhost
-if app.config.get("ALLOW_ORIGIN") == "localhost" or app.config.get("ALLOW_ORIGIN") == "127.0.0.1":
+if not (app.config.get("ALLOW_ORIGIN") == "localhost" or app.config.get("ALLOW_ORIGIN") == "127.0.0.1"):
     app = cors(app, allow_origin=app.config.get("ALLOW_ORIGIN"), allow_methods=["GET", "POST"])
 
 # Wrap app for auth

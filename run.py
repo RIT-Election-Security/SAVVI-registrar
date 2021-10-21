@@ -1,4 +1,3 @@
-from quart import helpers
 from app import app
 from app.database import add_eligible_voters
 
@@ -13,8 +12,9 @@ def runserver(host_address: str="0.0.0.0", port: int=5000, debug: bool=False, ke
         debug: toggle debug mode
     """
     if (key or cert) and not key or not cert:
-        print("both cert and key required if one presented")
+        print("Both cert and key required if one presented")
         exit(1)
+
     app.run(debug=debug, host=host_address, port=port, keyfile=key, certfile=cert)
 
 
