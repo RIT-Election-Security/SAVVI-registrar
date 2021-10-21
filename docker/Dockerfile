@@ -24,4 +24,4 @@ COPY docker/server.key /app/server.key
 COPY docker/server.crt /app/server.crt
 
 # Run on port 0.0.0.0:80
-CMD python run.py runserver -a "0.0.0.0" -p 80 -key /app/server.key -cert /app/server.crt
+CMD python run.py runserver -a "0.0.0.0" -p 443 -key /app/server.key -cert /app/server.crt
