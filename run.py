@@ -13,7 +13,7 @@ def runserver(host_address: str="0.0.0.0", port: int=5000, debug: bool=False, ke
         key: path to TLS key file
         cert: path to TLS certificate file
     """
-    if (key or cert) and not key or not cert:
+    if (key or cert) and (not key or not cert):
         print("Both cert and key required if one presented")
         exit(1)
 
