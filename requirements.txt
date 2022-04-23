@@ -7,7 +7,7 @@ Quart == 0.17.0
 cryptography == 35.0.0
 
 # app/registrar.py: 2
-quart_auth == 0.5.0
+quart_auth == 0.6.0
 
 # app/registrar.py: 3
 quart_cors == 0.5.0
