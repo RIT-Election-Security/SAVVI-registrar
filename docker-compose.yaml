@@ -8,6 +8,12 @@ services:
     env_file: ./docker/env_file
     volumes:
       - database:/app/data/
+  revproxy:
+    image: nginx
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/server.key:/etc/nginx/server.key
+      - ./docker/server.crt:/etc/nginx/server.crt
     ports:
       - 443:443
 
