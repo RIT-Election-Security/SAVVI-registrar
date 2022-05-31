@@ -8,12 +8,25 @@ services:
     env_file: ./docker/env_file
     volumes:
       - database:/app/data/
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+      - AUDIT_WRITE
   revproxy:
     build:
       context: .
       dockerfile: nginx/Dockerfile
     ports:
       - 443:443
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+      - AUDIT_WRITE
+      - CHOWN
+      - SETGID
+      - SETUID
 
 volumes:
   database:
