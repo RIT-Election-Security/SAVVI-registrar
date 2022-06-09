@@ -18,3 +18,5 @@ scrypt == 0.8.18
 # app/database.py: 1,2,3
 # app/models.py: 1,2
 sqlalchemy == 1.4.25
+
+hypercorn==0.13.2
