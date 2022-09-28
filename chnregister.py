@@ -15,11 +15,11 @@ def parse_args():
     parser.add_argument('-p',
                         '--honeypot',
                         help='Type of honeypot for this sensor',
-                        required=True)
+                        default="Registrar")
     parser.add_argument('-d',
                         '--deploy-key',
                         help='Deploy Key for registration',
-                        required=True)
+                        default=os.environ.get('CHN_DEPLOY_KEY'))
     parser.add_argument('-n',
                         '--hostname',
                         help='Hostname of honeypot',
@@ -35,21 +35,20 @@ def parse_args():
     parser.add_argument('-u',
                         '--url',
                         help='CHN Server to register to',
-                        required=True)
+                        default=os.environ.get('CHN_SERVER'))
     parser.add_argument('-k',
                         '--no-verify',
                         help='Do not verify TLS connection',
-                        action='store_true')
+                        action='store_true', default=True)
     parser.add_argument('-o',
                         '--state-output',
                         help='State output file',
-                        type=str)
+                        type=str, default=os.environ.get('REGISTRAR_JSON'))
 
     return parser.parse_args()
 
 
 def main():
-
     args = parse_args()
     name = "%s-%s" % (args.hostname, args.honeypot)
     overwrite = False
