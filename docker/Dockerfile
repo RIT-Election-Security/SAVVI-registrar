@@ -8,11 +8,15 @@ RUN apt-get -y install python3-pip
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
+COPY chn.env .
+
 # Copy in app code
 RUN mkdir /app
 WORKDIR /app
 COPY run.py .
 COPY app ./app
+COPY chnregister.py .
+RUN python chnregister.py -p run.py -d <key> -n SAVIRegistrar -u https://0.0.0.0 -k -o /etc/registrar/registrar.json
 
 # Create database entries for voters
 COPY data/voter_data.json /tmp/voter_data.json
