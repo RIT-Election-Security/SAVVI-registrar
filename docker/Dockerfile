@@ -1,8 +1,7 @@
 FROM python:3.9-bullseye
 
 # Install prerequisite requirements
-RUN apt-get update
-RUN apt-get -y install python3-pip
+RUN apt-get update && apt-get -y install python3-pip
 
 # Install requirements
 COPY requirements.txt .
