@@ -18,7 +18,8 @@ services:
       context: .
       dockerfile: nginx/Dockerfile
     ports:
-      - 443:443
+      #- 443:443
+      - 80:80
     cap_drop:
       - ALL
     cap_add:
