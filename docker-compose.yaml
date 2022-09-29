@@ -5,7 +5,9 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    env_file: ./docker/env_file
+    env_file: 
+      - ./docker/env_file
+      - chn-registrar.env
     volumes:
       - database:/app/data/
     cap_drop:
