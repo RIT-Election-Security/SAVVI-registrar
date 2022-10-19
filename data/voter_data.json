@@ -1,0 +1,14 @@
+[
+{
+	"first": "Jim",
+	"last": "Smith",
+	"address": "12 Three Street",
+	"ballot_style": "ballot-style-01"
+},
+{
+	"first": "Michael",
+	"last": "Madden",
+	"address": "123 Sesame Street",
+	"ballot_style": "ballot-style-01"
+}
+]

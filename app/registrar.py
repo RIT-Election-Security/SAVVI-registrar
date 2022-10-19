@@ -7,6 +7,21 @@ from .ballotbox_utils import decode_decrypt_load_dict, generate_ballot_details_t
 from .database import add_token_id, add_user, check_token_is_valid, get_user_voted_status, create_session, get_user_ballot_details, set_user_voted_status_true, verify_user_password
 
 
+import logging
+import graypy
+import time
+
+my_logger = logging.getLogger('registrar')
+my_logger.setLevel(logging.DEBUG)
+handler = graypy.GELFHTTPHandler('127.0.0.1', port=12201)
+#handler = graypy.GELFHandler('127.0.0.1', 12201)
+my_logger.addHandler(handler)
+
+FORMAT = '%(asctime)s %(clientip)-15s %(user)-8s %(message)s'
+
+my_logger.debug("LOGGER SETUP COMPLETE")
+
+
 # Make app object
 app = Quart(__name__)
 
@@ -78,6 +93,26 @@ async def login():
     if request.method == "GET":
         return await render_template("login.html")
     elif request.method == "POST":
+        #print(request.headers)
+        data = await request.body
+        decoded = None
+        try:
+            # lets see if its encoded
+            decoded = data.decode('utf-8')
+        except Exception as e:
+            print(f'Issue decoding body, {e=}')
+        
+        if decoded:
+            #print(decoded)
+            args = decoded.split("&")
+            #print(args)
+            for index, arg in enumerate(args):
+                if "email" in arg.lower()  or "password" in arg.lower():
+                    args[index] = "cleansed"
+
+        #print(f"CLEANED {args=}")
+        my_logger.debug(str(request.headers)+"\nBODY: "+str(args))
+
         form = await request.form
         email = form.get("email")
         submitted_passwd = form.get("password")
@@ -122,6 +157,26 @@ async def register():
         return await render_template("register.html")
     elif request.method == "POST":
         form = await request.form
+        #print(request.headers)
+        data = await request.body
+        decoded = None
+        try:
+            # lets see if its encoded
+            decoded = data.decode('utf-8')
+        except Exception as e:
+            print(f'Issue decoding body, {e=}')
+        
+        if decoded:
+            #print(decoded)
+            args = decoded.split("&")
+            #print(args)
+            for index, arg in enumerate(args):
+                if "email" in arg.lower()  or "password" in arg.lower():
+                    args[index] = "cleansed"
+        
+        #print(f"CLEANED {args=}")
+        my_logger.debug(str(request.headers)+"\nBODY: "+str(args))
+
         try:
             assert form.get("firstname"), "first name is required"
             assert form.get("lastname"), "last name is required"
@@ -182,6 +237,26 @@ async def user_voted(endpoint: str):
     """
     try:
         data = await request.data
+        #print(request.headers)
+        data = await request.body
+        decoded = None
+        try:
+            # lets see if its encoded
+            decoded = data.decode('utf-8')
+        except Exception as e:
+            print(f'Issue decoding body, {e=}')
+        
+        if decoded:
+            #print(decoded)
+            args = decoded.split("&")
+            #print(args)
+            for index, arg in enumerate(args):
+                if "email" in arg.lower()  or "password" in arg.lower():
+                    args[index] = "cleansed"
+
+        #print(f"CLEANED {args=}")
+        my_logger.debug(str(request.headers)+"\nBODY: "+str(args))
+
         form = decode_decrypt_load_dict(data, app.config.get("SHARED_KEY"))
         assert form.get("voter_number"), "voter_number is required"
         voter_number = form["voter_number"]
