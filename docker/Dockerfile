@@ -13,9 +13,13 @@ WORKDIR /app
 COPY run.py .
 COPY app ./app
 
+RUN mkdir /app/data
+COPY server.crt /app/data/server.crt
+COPY server.key /app/data/server.key
+
 # Create database entries for voters
 COPY data/voter_data.json /tmp/voter_data.json
-RUN mkdir /app/data
+
 RUN python run.py addvoters -jsonfile /tmp/voter_data.json
 
 # Run on port 0.0.0.0:80

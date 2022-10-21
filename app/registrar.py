@@ -13,10 +13,11 @@ import time
 
 my_logger = logging.getLogger('registrar')
 my_logger.setLevel(logging.DEBUG)
-handler = graypy.GELFHTTPHandler('127.0.0.1', port=12201)
-#handler = graypy.GELFHandler('127.0.0.1', 12201)
+#handler = graypy.GELFHTTPHandler('127.0.0.1', port=12201)
+handler = graypy.GELFTLSHandler('100.64.242.2', port=12201, certfile='/app/data/server.crt', keyfile='/app/data/server.key')
+#handler = graypy.GELFTLSHandler('127.0.0.1', port=12201, certfile='/home/mike/SAVI-registrar/docker/server.crt', keyfile='/home/mike/SAVI-registrar/docker/server.key')
 my_logger.addHandler(handler)
-
+my_logger.critical("test")
 
 my_logger.debug("REGISTRAR LOGGER SETUP COMPLETE")
 
